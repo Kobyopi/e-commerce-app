@@ -14,6 +14,18 @@ header nav ul li {
     margin-right: 1em;
 }
 
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin: 20px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
 .search-bar {
     margin: 1em;
 }

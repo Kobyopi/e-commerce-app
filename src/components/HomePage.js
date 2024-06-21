@@ -4,6 +4,8 @@ import Filter from './Filter';
 import SortMenu from './SortMenu';
 import Cart from './Cart';
 import SearchBar from './SearchBar';
+import Modal from './Modal';
+import SignUpForm from './SignUpForm';
 
 const HomePage = () => {
     const initialProducts = [
@@ -16,6 +18,7 @@ const HomePage = () => {
 
     const [products, setProducts] = useState(initialProducts);
     const [cart, setCart] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const addToCart = (product) => {
         setCart([...cart, product]);
@@ -36,13 +39,37 @@ const HomePage = () => {
     setProducts(filteredProducts);
     }
 
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const redirectToFacebook = () => {
+        window.location.href = 'https://www.facebook.com';
+    };
+
+    const openLanguageSwitcher = () => {
+        alert('Language switcher opened!');
+    };
+
     return (
         <div>
+            <div className="button-group">
+                <button onClick={openModal}>Sign Up</button>
+                <button onClick={redirectToFacebook}>Go to Facebook</button>
+                <button onClick={openLanguageSwitcher}>Switch Language</button>
+            </div>
             <SearchBar onSearch={handleSearch} />
             <Filter filterProducts={filterProducts} />
             <SortMenu sortProducts={sortProducts} />
             <ProductList products={products} addToCart={addToCart} />
             <Cart cart={cart} />
+            <Modal show={isModalOpen} onClose={closeModal}>
+                <SignUpForm />
+            </Modal>
         </div>
     );
 };

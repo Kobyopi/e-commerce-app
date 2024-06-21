@@ -6,38 +6,79 @@ import Cart from './Cart';
 import SearchBar from './SearchBar';
 import Modal from './Modal';
 import SignUpForm from './SignUpForm';
+import productsData from '../data/products';
 
 const HomePage = () => {
-    const initialProducts = [
-        { id: 1, name: 'Product 1', price: 100, onSale: true, visible: true, image: 'product1.jpg' },
-        { id: 2, name: 'Product 2', price: 200, onSale: false, visible: true, image: 'product2.jpg' },
-        { id: 3, name: 'Product 3', price: 150, onSale: true, visible: true, image: 'product3.jpg' },
-        // More products should be added
-    ];
-
-
-    const [products, setProducts] = useState(initialProducts);
+    const [products, setProducts] = useState(productsData);
     const [cart, setCart] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [sortedOrder, setSortedOrder] = useState('default');
+    const [selectedCategory, setSelectedCategory] = useState('All');
 
     const addToCart = (product) => {
-        setCart([...cart, product]);
-    }
+        const existingProduct = cart.find(item => item.id === product.id);
+        if (existingProduct) {
+            setCart(cart.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item));
+        } else {
+            setCart([...cart, { ...product, quantity: 1 }]);
+        }
+    };
 
-    const filterProducts = (criteria) => {
-        // Implement filter logic here
+    const updateCartQuantity = (productId, quantity) => {
+        if (quantity <= 0) {
+            setCart(cart.filter(item => item.id !== productId));
+        } else {
+            setCart(cart.map(item => item.id === productId ? { ...item, quantity } : item));
+        }
     };
 
     const sortProducts = (order) => {
-        // Implement sort logic here
+        setSortedOrder(order);
+        let sortedProducts;
+        switch (order) {
+            case 'lowToHigh':
+                sortedProducts = [...products].sort((a, b) => a.price - b.price);
+                break;
+            case 'highToLow':
+                sortedProducts = [...products].sort((a, b) => b.price - a.price);
+                break;
+            default:
+                sortedProducts = [...products]; // Default order (can be customized)
+                break;
+        }
+        setProducts(sortedProducts);
+    };
+
+    const categories = ['All', 'Gadgets', 'Devices', 'Tools', 'Widgets', 'Gizmos', 'Apparatuses'];
+
+    const filterProducts = (criteria) => {
+        setSelectedCategory(criteria);
+        let filteredProducts;
+        switch (criteria) {
+            case 'onSale':
+                filteredProducts = productsData.filter(product => product.onSale);
+                break;
+            case 'notOnSale':
+                filteredProducts = productsData.filter(product => !product.onSale);
+                break;
+            case 'All':
+                filteredProducts = productsData; // Show all products
+                break;
+            default:
+                filteredProducts = productsData.filter(product => product.category === criteria); // Filter by category
+                break;
+        }
+        setProducts(filteredProducts);
+        sortProducts(sortedOrder); // Reapply sorting after filtering
     };
 
     const handleSearch = (query) => {
-        const filteredProducts = initialProducts.filter(product =>
-        product.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setProducts(filteredProducts);
-    }
+        const filteredProducts = productsData.filter(product =>
+            product.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setProducts(filteredProducts);
+        sortProducts(sortedOrder); // Reapply sorting after searching
+    };
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -63,10 +104,10 @@ const HomePage = () => {
                 <button onClick={openLanguageSwitcher}>Switch Language</button>
             </div>
             <SearchBar onSearch={handleSearch} />
-            <Filter filterProducts={filterProducts} />
+            <Filter filterProducts={filterProducts} categories={categories} selectedCategory={selectedCategory} />
             <SortMenu sortProducts={sortProducts} />
             <ProductList products={products} addToCart={addToCart} />
-            <Cart cart={cart} />
+            <Cart cart={cart} updateCartQuantity={updateCartQuantity} />
             <Modal show={isModalOpen} onClose={closeModal}>
                 <SignUpForm />
             </Modal>

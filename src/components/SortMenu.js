@@ -1,16 +1,14 @@
 import React from 'react';
+import './SortMenu.css';
 
 const SortMenu = ({ sortProducts }) => {
-    const handleSortChange = (e) => {
-        sortProducts(e.target.value);
-    };
-
     return (
-        <div>
-            <label>Sort by: </label>
-            <select onChange={handleSortChange}>
-                <option value="priceAsc">Price (Low to High)</option>
-                <option value="priceDesc">Price (High to Low)</option>
+        <div className="sort-menu">
+            <label>Sort by price: </label>
+            <select onChange={(e) => sortProducts(e.target.value)}>
+                <option value="default">Default</option>
+                <option value="lowToHigh">Low to High</option>
+                <option value="highToLow">High to Low</option>
             </select>
         </div>
     );

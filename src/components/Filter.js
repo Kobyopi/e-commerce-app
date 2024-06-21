@@ -1,17 +1,18 @@
 import React from 'react';
 
-const Filter = ({ filterProducts }) => {
-    const handleFilterChange = (e) => {
-        filterProducts(e.target.value);
+const Filter = ({ filterProducts, categories, selectedCategory }) => {
+    const handleCategoryChange = (event) => {
+        filterProducts(event.target.value);
     };
 
     return (
-        <div>
-            <label>Filter: </label>
-            <select onChange={handleFilterChange}>
-                <option value="all">All</option>
-                <option value="onSale">On Sale</option>
-                <option value="notOnSale">Not On Sale</option>
+        <div className="filter-menu">
+            <select value={selectedCategory} onChange={handleCategoryChange}>
+                {categories.map((category) => (
+                    <option key={category} value={category}>
+                        {category}
+                    </option>
+                ))}
             </select>
         </div>
     );

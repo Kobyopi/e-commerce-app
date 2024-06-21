@@ -42,7 +42,7 @@ const HomePage = () => {
                 sortedProducts = [...products].sort((a, b) => b.price - a.price);
                 break;
             default:
-                sortedProducts = productsData; // Default order (can be customized)
+                sortedProducts = [...products]; // Default order (can be customized)
                 break;
         }
         setProducts(sortedProducts);
@@ -58,11 +58,10 @@ const HomePage = () => {
                 filteredProducts = productsData.filter(product => !product.onSale);
                 break;
             default:
-                filteredProducts = productsData; // Show all products
+                filteredProducts = productsData.filter(product => product.category === criteria); // Filter by category
                 break;
         }
         setProducts(filteredProducts);
-        // Reapply the sorting after filtering
         sortProducts(sortedOrder);
     };
 
@@ -71,7 +70,6 @@ const HomePage = () => {
             product.name.toLowerCase().includes(query.toLowerCase())
         );
         setProducts(filteredProducts);
-        // Reapply the sorting after searching
         sortProducts(sortedOrder);
     };
 

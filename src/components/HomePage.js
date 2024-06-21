@@ -6,23 +6,16 @@ import Cart from './Cart';
 import SearchBar from './SearchBar';
 import Modal from './Modal';
 import SignUpForm from './SignUpForm';
+import productsData from '../data/products';
 
 const HomePage = () => {
-    const initialProducts = [
-        { id: 1, name: 'Product 1', price: 100, onSale: true, visible: true, image: 'product1.jpg' },
-        { id: 2, name: 'Product 2', price: 200, onSale: false, visible: true, image: 'product2.jpg' },
-        { id: 3, name: 'Product 3', price: 150, onSale: true, visible: true, image: 'product3.jpg' },
-        // More products should be added
-    ];
-
-
-    const [products, setProducts] = useState(initialProducts);
+    const [products, setProducts] = useState(productsData);
     const [cart, setCart] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const addToCart = (product) => {
         setCart([...cart, product]);
-    }
+    };
 
     const filterProducts = (criteria) => {
         // Implement filter logic here
@@ -33,11 +26,11 @@ const HomePage = () => {
     };
 
     const handleSearch = (query) => {
-        const filteredProducts = initialProducts.filter(product =>
-        product.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setProducts(filteredProducts);
-    }
+        const filteredProducts = productsData.filter(product =>
+            product.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setProducts(filteredProducts);
+    };
 
     const openModal = () => {
         setIsModalOpen(true);

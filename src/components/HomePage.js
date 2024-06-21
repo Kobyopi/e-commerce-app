@@ -13,6 +13,7 @@ const HomePage = () => {
     const [cart, setCart] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [sortedOrder, setSortedOrder] = useState('default');
+    const [selectedCategory, setSelectedCategory] = useState('All');
 
     const addToCart = (product) => {
         const existingProduct = cart.find(item => item.id === product.id);
@@ -48,7 +49,10 @@ const HomePage = () => {
         setProducts(sortedProducts);
     };
 
+    const categories = ['All', 'Gadgets', 'Devices', 'Tools', 'Widgets', 'Gizmos', 'Apparatuses'];
+
     const filterProducts = (criteria) => {
+        setSelectedCategory(criteria);
         let filteredProducts;
         switch (criteria) {
             case 'onSale':
@@ -57,12 +61,15 @@ const HomePage = () => {
             case 'notOnSale':
                 filteredProducts = productsData.filter(product => !product.onSale);
                 break;
+            case 'All':
+                filteredProducts = productsData; // Show all products
+                break;
             default:
                 filteredProducts = productsData.filter(product => product.category === criteria); // Filter by category
                 break;
         }
         setProducts(filteredProducts);
-        sortProducts(sortedOrder);
+        sortProducts(sortedOrder); // Reapply sorting after filtering
     };
 
     const handleSearch = (query) => {
@@ -70,7 +77,7 @@ const HomePage = () => {
             product.name.toLowerCase().includes(query.toLowerCase())
         );
         setProducts(filteredProducts);
-        sortProducts(sortedOrder);
+        sortProducts(sortedOrder); // Reapply sorting after searching
     };
 
     const openModal = () => {
@@ -97,7 +104,7 @@ const HomePage = () => {
                 <button onClick={openLanguageSwitcher}>Switch Language</button>
             </div>
             <SearchBar onSearch={handleSearch} />
-            <Filter filterProducts={filterProducts} />
+            <Filter filterProducts={filterProducts} categories={categories} selectedCategory={selectedCategory} />
             <SortMenu sortProducts={sortProducts} />
             <ProductList products={products} addToCart={addToCart} />
             <Cart cart={cart} updateCartQuantity={updateCartQuantity} />

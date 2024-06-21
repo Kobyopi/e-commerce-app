@@ -1,14 +1,11 @@
 import React from 'react';
+import './Filter.css';
 
 const Filter = ({ filterProducts }) => {
-    const handleFilterChange = (e) => {
-        filterProducts(e.target.value);
-    };
-
     return (
-        <div>
-            <label>Filter: </label>
-            <select onChange={handleFilterChange}>
+        <div className="filter-menu">
+            <label>Filter products: </label>
+            <select onChange={(e) => filterProducts(e.target.value)}>
                 <option value="all">All</option>
                 <option value="onSale">On Sale</option>
                 <option value="notOnSale">Not On Sale</option>

@@ -1,0 +1,13 @@
+.filter-menu {
+    margin: 1em 0;
+}
+
+.filter-menu label {
+    margin-right: 0.5em;
+}
+
+.filter-menu select {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

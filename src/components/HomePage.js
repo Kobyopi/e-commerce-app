@@ -49,7 +49,21 @@ const HomePage = () => {
     };
 
     const filterProducts = (criteria) => {
-        // Implement filter logic here
+        let filteredProducts;
+        switch (criteria) {
+            case 'onSale':
+                filteredProducts = productsData.filter(product => product.onSale);
+                break;
+            case 'notOnSale':
+                filteredProducts = productsData.filter(product => !product.onSale);
+                break;
+            default:
+                filteredProducts = productsData; // Show all products
+                break;
+        }
+        setProducts(filteredProducts);
+        // Reapply the sorting after filtering
+        sortProducts(sortedOrder);
     };
 
     const handleSearch = (query) => {
@@ -57,6 +71,8 @@ const HomePage = () => {
             product.name.toLowerCase().includes(query.toLowerCase())
         );
         setProducts(filteredProducts);
+        // Reapply the sorting after searching
+        sortProducts(sortedOrder);
     };
 
     const openModal = () => {

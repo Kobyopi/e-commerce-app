@@ -12,17 +12,44 @@ const HomePage = () => {
     const [products, setProducts] = useState(productsData);
     const [cart, setCart] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [sortedOrder, setSortedOrder] = useState('default');
 
     const addToCart = (product) => {
-        setCart([...cart, product]);
+        const existingProduct = cart.find(item => item.id === product.id);
+        if (existingProduct) {
+            setCart(cart.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item));
+        } else {
+            setCart([...cart, { ...product, quantity: 1 }]);
+        }
+    };
+
+    const updateCartQuantity = (productId, quantity) => {
+        if (quantity <= 0) {
+            setCart(cart.filter(item => item.id !== productId));
+        } else {
+            setCart(cart.map(item => item.id === productId ? { ...item, quantity } : item));
+        }
+    };
+
+    const sortProducts = (order) => {
+        setSortedOrder(order);
+        let sortedProducts;
+        switch (order) {
+            case 'lowToHigh':
+                sortedProducts = [...products].sort((a, b) => a.price - b.price);
+                break;
+            case 'highToLow':
+                sortedProducts = [...products].sort((a, b) => b.price - a.price);
+                break;
+            default:
+                sortedProducts = productsData; // Default order (can be customized)
+                break;
+        }
+        setProducts(sortedProducts);
     };
 
     const filterProducts = (criteria) => {
         // Implement filter logic here
-    };
-
-    const sortProducts = (order) => {
-        // Implement sort logic here
     };
 
     const handleSearch = (query) => {
@@ -59,7 +86,7 @@ const HomePage = () => {
             <Filter filterProducts={filterProducts} />
             <SortMenu sortProducts={sortProducts} />
             <ProductList products={products} addToCart={addToCart} />
-            <Cart cart={cart} />
+            <Cart cart={cart} updateCartQuantity={updateCartQuantity} />
             <Modal show={isModalOpen} onClose={closeModal}>
                 <SignUpForm />
             </Modal>

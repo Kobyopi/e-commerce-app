@@ -1,10 +1,11 @@
 import React from 'react';
+import './ContactForm.css'; // Correct path to your CSS file
 
 const ContactForm = () => {
     return (
-        <div>
+        <div className="contact-form-container">
             <h2>Contact Us</h2>
-            <form>
+            <form className="contact-form">
                 <label>Name: </label>
                 <input type="text" required />
                 <label>Email: </label>

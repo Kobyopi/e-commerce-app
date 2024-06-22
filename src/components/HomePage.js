@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductList from './ProductList';
 import Filter from './Filter';
 import SortMenu from './SortMenu';
@@ -13,7 +13,7 @@ const HomePage = () => {
     const [cart, setCart] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [sortedOrder, setSortedOrder] = useState('default');
-    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [searchQuery, setSearchQuery] = useState('');
 
     const addToCart = (product) => {
         const existingProduct = cart.find(item => item.id === product.id);
@@ -43,17 +43,14 @@ const HomePage = () => {
                 sortedProducts = [...products].sort((a, b) => b.price - a.price);
                 break;
             default:
-                sortedProducts = [...products]; // Default order (can be customized)
+                sortedProducts = productsData; // Default order (can be customized)
                 break;
         }
         setProducts(sortedProducts);
     };
 
-    const categories = ['All', 'Gadgets', 'Devices', 'Tools', 'Widgets', 'Gizmos', 'Apparatuses'];
-
-    const filterProducts = (criteria) => {
-        setSelectedCategory(criteria);
-        let filteredProducts;
+    const applyFilter = (criteria) => {
+        let filteredProducts = productsData;
         switch (criteria) {
             case 'onSale':
                 filteredProducts = productsData.filter(product => product.onSale);
@@ -61,7 +58,7 @@ const HomePage = () => {
             case 'notOnSale':
                 filteredProducts = productsData.filter(product => !product.onSale);
                 break;
-            case 'All':
+            case 'all':
                 filteredProducts = productsData; // Show all products
                 break;
             default:
@@ -69,7 +66,9 @@ const HomePage = () => {
                 break;
         }
         setProducts(filteredProducts);
-        sortProducts(sortedOrder); // Reapply sorting after filtering
+        if (searchQuery) {
+            handleSearch(searchQuery); // Reapply search filter after applying other filters
+        }
     };
 
     const handleSearch = (query) => {
@@ -77,7 +76,6 @@ const HomePage = () => {
             product.name.toLowerCase().includes(query.toLowerCase())
         );
         setProducts(filteredProducts);
-        sortProducts(sortedOrder); // Reapply sorting after searching
     };
 
     const openModal = () => {
@@ -104,7 +102,7 @@ const HomePage = () => {
                 <button onClick={openLanguageSwitcher}>Switch Language</button>
             </div>
             <SearchBar onSearch={handleSearch} />
-            <Filter filterProducts={filterProducts} categories={categories} selectedCategory={selectedCategory} />
+            <Filter applyFilter={applyFilter} />
             <SortMenu sortProducts={sortProducts} />
             <ProductList products={products} addToCart={addToCart} />
             <Cart cart={cart} updateCartQuantity={updateCartQuantity} />

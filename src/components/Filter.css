@@ -1,13 +1,32 @@
+/* Filter Menu Container */
 .filter-menu {
     margin: 1em 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5em; /* Space between label and select */
 }
 
+/* Filter Menu Label */
 .filter-menu label {
     margin-right: 0.5em;
+    font-weight: bold; /* Bold label for emphasis */
+    color: #333; /* Darker text color for better readability */
 }
 
+/* Filter Menu Select Box */
 .filter-menu select {
-    padding: 0.5em;
+    padding: 0.5em 1em; /* Increased padding for better click area */
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #fff; /* White background for better contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    outline: none; /* Remove default outline */
+}
+
+/* Hover and Focus State for Select Box */
+.filter-menu select:hover,
+.filter-menu select:focus {
+    border-color: #888; /* Slightly darker border on hover/focus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Slightly larger shadow on hover/focus */
 }

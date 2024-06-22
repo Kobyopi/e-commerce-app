@@ -1,10 +1,11 @@
 import React from 'react';
+import './LoginForm.css'; // Correct path to your CSS file
 
 const LoginForm = () => {
     return (
-        <div>
+        <div className="login-form-container">
             <h2>Log In</h2>
-            <form>
+            <form className="login-form">
                 <label>Email: </label>
                 <input type="email" required />
                 <label>Password: </label>

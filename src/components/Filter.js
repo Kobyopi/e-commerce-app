@@ -1,21 +1,27 @@
 import React from 'react';
+import './Filter.css';
 
-const Filter = ({ filterProducts, categories, selectedCategory }) => {
-    const handleCategoryChange = (event) => {
-        filterProducts(event.target.value);
+const ProductFilter = ({ applyFilter }) => {
+    const onFilterChange = (event) => {
+        applyFilter(event.target.value);
     };
 
     return (
-        <div className="filter-menu">
-            <select value={selectedCategory} onChange={handleCategoryChange}>
-                {categories.map((category) => (
-                    <option key={category} value={category}>
-                        {category}
-                    </option>
-                ))}
+        <div>
+            <label htmlFor="product-filter">Filter Products: </label>
+            <select id="product-filter" onChange={onFilterChange}>
+                <option value="all">All Products</option>
+                <option value="onSale">On Sale</option>
+                <option value="notOnSale">Unavailable</option>
+                <option value="Gadget">Gadget</option>
+                <option value="Device">Device</option>
+                <option value="Tool">Tool</option>
+                <option value="Book">Book</option>
+                <option value="Shoe">Shoe</option>
+                <option value="Jacket">Jacket</option>
             </select>
         </div>
     );
 };
 
-export default Filter;
+export default ProductFilter;

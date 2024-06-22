@@ -1,115 +1,131 @@
 const products = [
     {
       id: 1,
-      name: "Gadget A",
-      image: "https://via.placeholder.com/150?text=Gadget+A",
+      name: "Label Maker",
+      image: "/images/Gadget_A.jpg",
       price: 99,
       onSale: true,
+      category: "Gadget"
     },
     {
       id: 2,
-      name: "Gadget B",
-      image: "https://via.placeholder.com/150?text=Gadget+B",
+      name: "Hand Warmers",
+      image: "/images/Gadget_B.jpg",
       price: 199,
       onSale: false,
+      category: "Gadget"
     },
     {
       id: 3,
-      name: "Gadget C",
-      image: "https://via.placeholder.com/150?text=Gadget+C",
+      name: "Infrared Thermometer",
+      image: "/images/Gadget_C.jpg",
       price: 149,
       onSale: true,
+      category: "Gadget"
     },
     {
       id: 4,
-      name: "Device X",
-      image: "https://via.placeholder.com/150?text=Device+X",
+      name: "Amazon Kindle",
+      image: "/images/Device_X.jpg",
       price: 119,
       onSale: false,
+      category: "Device"
     },
     {
       id: 5,
-      name: "Device Y",
-      image: "https://via.placeholder.com/150?text=Device+Y",
+      name: "HP Printer",
+      image: "images/Device_Y.jpg",
       price: 129,
       onSale: true,
+      cateogry: "Device"
     },
     {
       id: 6,
-      name: "Device Z",
-      image: "https://via.placeholder.com/150?text=Device+Z",
+      name: "LG TV",
+      image: "/images/Device_Z.jpg",
       price: 109,
       onSale: false,
+      category: "Device"
     },
     {
       id: 7,
-      name: "Tool Alpha",
-      image: "https://via.placeholder.com/150?text=Tool+Alpha",
+      name: "Pruning Shears",
+      image: "/images/Tool_1.jpg",
       price: 169,
       onSale: true,
+      category: "Tool"
     },
     {
       id: 8,
-      name: "Tool Beta",
-      image: "https://via.placeholder.com/150?text=Tool+Beta",
+      name: "Rake",
+      image: "/images/Tool_2.jpg",
       price: 189,
       onSale: false,
+      category: "Tool"
     },
     {
       id: 9,
-      name: "Tool Gamma",
-      image: "https://via.placeholder.com/150?text=Tool+Gamma",
+      name: "Gardening Machete",
+      image: "/images/Tool_3.jpg",
       price: 159,
       onSale: true,
+      cateogry: "Tool"
     },
     {
       id: 10,
-      name: "Widget One",
-      image: "https://via.placeholder.com/150?text=Widget+One",
+      name: "Red Rising Trilogy",
+      image: "/images/Book_1.jpg",
       price: 179,
       onSale: false,
+      category: "Book"
     },
     {
       id: 11,
-      name: "Widget Two",
-      image: "https://via.placeholder.com/150?text=Widget+Two",
+      name: "The Hobbit and The Lord of The Rings Set",
+      image: "/images/Book_2.jpg",
       price: 139,
       onSale: true,
+      category: "Book"
     },
     {
       id: 12,
-      name: "Widget Three",
-      image: "https://via.placeholder.com/150?text=Widget+Three",
+      name: "Hunger Games Book #1",
+      image: "/images/Book_3.jpg",
       price: 199,
       onSale: false,
+      category: "Book"
     },
     {
       id: 13,
-      name: "Gizmo Prime",
-      image: "https://via.placeholder.com/150?text=Gizmo+Prime",
+      name: "Under Armour",
+      image: "images/Shoe_1.jpg",
       price: 209,
       onSale: true,
+      category: "Shoe"
     },
     {
       id: 14,
-      name: "Gizmo Lite",
-      image: "https://via.placeholder.com/150?text=Gizmo+Lite",
+      name: "Skechers",
+      image: "/images/Shoe_2.jpg",
       price: 219,
       onSale: false,
+      category: "Shoe"
     },
     {
       id: 15,
-      name: "Apparatus A",
-      image: "https://via.placeholder.com/150?text=Apparatus+A",
+      name: "Helly-Hansen Jacket",
+      image: "/images/Jacket_1.jpg",
       price: 229,
       onSale: true,
+      category: "Jacket"
     },
     {
       id: 16,
-      name: "Apparatus B",
-      image: "https://via.placeholder.com/150?text=Apparatus+B",
+      name: "Legendary Whitetails Jacket",
+      image: "/images/Jacket_2.jpg",
       price: 239,
       onSale: false,
+      category: "Jacket"
     },
   ];
   

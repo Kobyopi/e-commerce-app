@@ -33,7 +33,7 @@
     font-size: 1em;
     transition: border-color 0.3s ease;
     width: 100%;
-    box-sizing: border-box; /* Ensure padding and border are included in width */
+    box-sizing: border-box;
 }
 
 .contact-form input:focus,
@@ -44,7 +44,7 @@
 }
 
 .contact-form textarea {
-    min-height: 120px; /* Set a minimum height for the textarea */
+    min-height: 120px;
 }
 
 .contact-form button {

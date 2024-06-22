@@ -43,7 +43,7 @@ const HomePage = () => {
                 sortedProducts = [...products].sort((a, b) => b.price - a.price);
                 break;
             default:
-                sortedProducts = productsData; // Default order (can be customized)
+                sortedProducts = productsData;
                 break;
         }
         setProducts(sortedProducts);
@@ -59,15 +59,15 @@ const HomePage = () => {
                 filteredProducts = productsData.filter(product => !product.onSale);
                 break;
             case 'all':
-                filteredProducts = productsData; // Show all products
+                filteredProducts = productsData;
                 break;
             default:
-                filteredProducts = productsData.filter(product => product.category === criteria); // Filter by category
+                filteredProducts = productsData.filter(product => product.category === criteria);
                 break;
         }
         setProducts(filteredProducts);
         if (searchQuery) {
-            handleSearch(searchQuery); // Reapply search filter after applying other filters
+            handleSearch(searchQuery);
         }
     };
 

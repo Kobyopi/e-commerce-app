@@ -1,5 +1,5 @@
 import React from 'react';
-import './SignUpForm.css'; // Import the CSS file where your styles are defined
+import './SignUpForm.css';
 
 const SignUpForm = () => {
     return (
